@@ -3,7 +3,6 @@ using InterviewHelper.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InterviewHelper.Controllers
@@ -22,10 +21,6 @@ namespace InterviewHelper.Controllers
         [HttpGet]
         public Task<List<HumanResource>> GetAll()
         {
-            _humanResourceContext.HumanResources.RemoveRange(_humanResourceContext.HumanResources.ToList());
-
-            _humanResourceContext.SaveChanges();
-
             return _humanResourceContext.HumanResources.AsNoTracking().Include(x => x.AsnwerParts).ToListAsync();
         }
 
