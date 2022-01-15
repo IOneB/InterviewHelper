@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.Web", "Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.DAL", "InterviewHelper.DAL\InterviewHelper.DAL.csproj", "{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{C6F8040E-7230-4322-A007-2FB02559F047}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{2A0C9B84-5BFD-4701-9C80-A0412D3C5366}"
 EndProject
 Global

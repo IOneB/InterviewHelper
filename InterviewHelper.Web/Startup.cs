@@ -36,7 +36,7 @@ namespace InterviewHelper.Web
                     builder.AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("https://localhost:5001");
+                    .WithOrigins("https://little-interview-helper.herokuapp.com");
                 });
             });
         }
