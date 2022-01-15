@@ -3,6 +3,7 @@ using InterviewHelper.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InterviewHelper.Controllers
@@ -19,64 +20,62 @@ namespace InterviewHelper.Controllers
         }
 
         [HttpGet]
-        public Task<List<HumanResource>> Get()
+        public Task<List<HumanResource>> GetAll()
         {
-            _humanResourceContext.HumanResources.Add(new HumanResource
-            {
-                Name = "Я",
-                DateInput = System.DateTime.Now
-            });
+            _humanResourceContext.HumanResources.RemoveRange(_humanResourceContext.HumanResources.ToList());
+
             _humanResourceContext.SaveChanges();
-            return _humanResourceContext.HumanResources.AsNoTracking().ToListAsync();
+
+            return _humanResourceContext.HumanResources.AsNoTracking().Include(x => x.AsnwerParts).ToListAsync();
         }
 
+        [HttpGet("{id}", Name = "GetHumanResource")]
+        public async Task<ActionResult<HumanResource>> Details(long id)
+        {
+            var human = await _humanResourceContext.HumanResources.AsNoTracking().Include(x => x.AsnwerParts).FirstOrDefaultAsync(x => x.Id == id);
 
-        //[HttpGet]
-        //public Task<List<Work>> Get()
-        //{
-        //    return _workService.GetAsync();
-        //}
+            if (human is null)
+                return NotFound();
 
-        //[HttpGet("{id}", Name = "GetWork")]
-        //public async Task<ActionResult<Work>> Details(string id)
-        //{
-        //    var work = await _workService.GetAsync(id);
+            return human;
+        }
 
-        //    if (work is null)
-        //        return NotFound();
+        [HttpPost]
+        public async Task<IActionResult> Create(HumanResource humanResource)
+        {
+            await _humanResourceContext.HumanResources.AddAsync(humanResource);
+            await _humanResourceContext.SaveChangesAsync();
 
-        //    return work;
-        //}
+            return CreatedAtAction("GetHumanResource", new { id = humanResource.Id }, humanResource);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create(Work work)
-        //{
-        //    await _workService.CreateAsync(work);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(long id, HumanResource humanResourceIn)
+        {
+            var humanResource = await _humanResourceContext.HumanResources.Include(x => x.AsnwerParts).FirstOrDefaultAsync(x => x.Id == id);
+            if (humanResource is null)
+                return NotFound();
 
-        //    return CreatedAtAction("GetWork", new { id = work.Id }, work);
-        //}
+            humanResource.Name = humanResourceIn.Name;
+            humanResource.DateInput = humanResourceIn.DateInput;
+            humanResource.AsnwerParts = humanResourceIn.AsnwerParts;
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Update(string id, Work workIn)
-        //{
-        //    var work = await _workService.GetAsync(id);
-        //    if (work is null)
-        //        return NotFound();
+            await _humanResourceContext.SaveChangesAsync();
 
-        //    await _workService.UpdateAsync(id, workIn);
+            return NoContent();
+        }
 
-        //    return NoContent();
-        //}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var humanResource = await _humanResourceContext.HumanResources.FirstOrDefaultAsync(x => x.Id == id);
+            if (humanResource is null)
+                return NotFound();
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    var work = await _workService.GetAsync(id);
-        //    if (work is null)
-        //        return NotFound();
+            _humanResourceContext.HumanResources.Remove(humanResource);
+            await _humanResourceContext.SaveChangesAsync();
 
-        //    await _workService.RemoveAsync(work.Id);
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
     }
 }
