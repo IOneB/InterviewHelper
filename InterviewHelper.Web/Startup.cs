@@ -60,7 +60,7 @@ namespace InterviewHelper.Web
             {
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                    spa.UseProxyToSpaDevelopmentServer("https://little-interview-helper-client.herokuapp.com/");
                 }
             });
 
