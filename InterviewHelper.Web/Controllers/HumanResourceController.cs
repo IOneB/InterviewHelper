@@ -1,23 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InterviewHelper.DAL.Models.Entities;
+using InterviewHelper.Web;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MongoBongo.Controllers
+namespace InterviewHelper.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class WorkController : ControllerBase
+    public class HumanResourceController : ControllerBase
     {
-        // private readonly WorkService _workService;
+        private readonly HumanResourcesContext _humanResourceContext;
 
-        public WorkController(/*WorkService workService*/)
+        public HumanResourceController(HumanResourcesContext humanResourceContext)
         {
-            //_workService = workService;
+            _humanResourceContext = humanResourceContext;
         }
 
         [HttpGet]
-        public ValueTask<string> Get()
+        public Task<List<HumanResource>> Get()
         {
-            return ValueTask.FromResult("Hello World!");
+            _humanResourceContext.HumanResources.Add(new HumanResource
+            {
+                Name = "Я",
+                DateInput = System.DateTime.Now
+            });
+            _humanResourceContext.SaveChanges();
+            return _humanResourceContext.HumanResources.AsNoTracking().ToListAsync();
         }
 
 

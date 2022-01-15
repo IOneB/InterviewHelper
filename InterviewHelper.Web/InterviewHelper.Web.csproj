@@ -7,11 +7,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MongoBongo.DAL\InterviewHelper.DAL.csproj" />
+    <ProjectReference Include="..\InterviewHelper.DAL\InterviewHelper.DAL.csproj" />
+    <ProjectReference Include="..\InterviewHelper.DAL\InterviewHelper.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,8 +1,15 @@
-﻿namespace InterviewHelper.Web
+﻿using InterviewHelper.DAL.Models.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace InterviewHelper.Web
 {
-    public class HumanResourcesContext
+    public class HumanResourcesContext : DbContext
     {
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //    => optionsBuilder.UseNpgsql("Host=my_host;Database=my_db;Username=my_user;Password=my_pw");
+        public DbSet<HumanResource> HumanResources { get; set; }
+
+        public HumanResourcesContext(DbContextOptions options) : base(options)
+        {
+
+        }
     }
 }

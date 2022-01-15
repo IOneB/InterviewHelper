@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MongoBongo
+namespace InterviewHelper.Web
 {
     public class Program
     {

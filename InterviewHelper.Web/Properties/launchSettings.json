@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "MongoBongo": {
+    "InterviewHelper": {
       "commandName": "Project",
       "launchBrowser": false,
       "environmentVariables": {
