@@ -19,8 +19,4 @@
     <ProjectReference Include="..\InterviewHelper.DAL\InterviewHelper.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ConfigureServicesExtensions\" />
-  </ItemGroup>
-
 </Project>

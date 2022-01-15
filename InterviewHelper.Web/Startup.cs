@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 
 namespace InterviewHelper.Web
@@ -19,45 +18,32 @@ namespace InterviewHelper.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddDbContext<HumanResourcesContext>(options =>
-                {
-                    string connectionString = Configuration.GetConnectionString("HumanResourcesContext");
-                    var context = options.UseNpgsql(connectionString);
-                })
-                .AddSpaStaticFiles(config => config.RootPath = "wwwroot");
-
-            services.AddControllers();
-
-            services.AddCors(opt =>
+            services.AddDbContext<HumanResourcesContext>(options =>
             {
-                opt.AddPolicy("VueCorsPolicy", builder =>
-                {
-                    builder.AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials()
-                    .WithOrigins("https://little-interview-helper.herokuapp.com",
-                        "https://little-interview-helper-client.herokuapp.com",
-                        "http://little-interview-helper-client.herokuapp.com",
-                        "http://little-interview-helper.herokuapp.com");
-                });
+                string connectionString = Configuration.GetConnectionString("HumanResourcesContext");
+                var context = options.UseNpgsql(connectionString);
             });
+
+            services.AddCors();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
-            app.UseCors("VueCorsPolicy");
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(o => true)
+                .AllowCredentials());
 
             app.UseAuthentication();
-            app.UseRouting();
 
+            app.UseRouting();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
-            app.UseSpaStaticFiles();
 
             Migrate(app);
         }

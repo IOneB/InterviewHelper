@@ -2,7 +2,7 @@
 using InterviewHelper.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InterviewHelper.Controllers
@@ -19,9 +19,11 @@ namespace InterviewHelper.Controllers
         }
 
         [HttpGet]
-        public Task<List<HumanResource>> GetAll()
+        public async Task<string> GetAll()
         {
-            return _humanResourceContext.HumanResources.AsNoTracking().Include(x => x.AsnwerParts).ToListAsync();
+            var humanResources = await _humanResourceContext.HumanResources.AsNoTracking().Include(x => x.AsnwerParts).ToListAsync();
+
+            return $"APIv1.3 {string.Join(", ", humanResources.Select(x => x.Name))}. TotalCount: {humanResources.Count}";
         }
 
         [HttpGet("{id}", Name = "GetHumanResource")]
