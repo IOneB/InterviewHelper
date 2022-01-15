@@ -36,7 +36,10 @@ namespace InterviewHelper.Web
                     builder.AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("https://little-interview-helper.herokuapp.com");
+                    .WithOrigins("https://little-interview-helper.herokuapp.com",
+                        "https://little-interview-helper-client.herokuapp.com",
+                        "https://little-interview-helper-client.herokuapp.com",
+                        "http://little-interview-helper.herokuapp.com");
                 });
             });
         }
@@ -55,14 +58,6 @@ namespace InterviewHelper.Web
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
             app.UseSpaStaticFiles();
-
-            app.UseSpa(spa =>
-            {
-                if (env.IsDevelopment())
-                {
-                    spa.UseProxyToSpaDevelopmentServer("https://little-interview-helper-client.herokuapp.com/");
-                }
-            });
 
             Migrate(app);
         }
