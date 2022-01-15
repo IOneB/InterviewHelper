@@ -38,7 +38,7 @@ namespace InterviewHelper.Web
                     .AllowCredentials()
                     .WithOrigins("https://little-interview-helper.herokuapp.com",
                         "https://little-interview-helper-client.herokuapp.com",
-                        "https://little-interview-helper-client.herokuapp.com",
+                        "http://little-interview-helper-client.herokuapp.com",
                         "http://little-interview-helper.herokuapp.com");
                 });
             });
