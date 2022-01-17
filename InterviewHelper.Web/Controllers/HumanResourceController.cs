@@ -41,7 +41,8 @@ namespace InterviewHelper.Controllers
             return CreatedAtAction("GetHumanResource", new { id = humanResource.Id }, humanResource);
         }
 
-        [HttpPut("{id}")]
+        [Route("{id:int}")]
+        [HttpPut]
         public async Task<IActionResult> Update(long id, HumanResource humanResourceIn)
         {
             var humanResource = await _humanResourceContext.HumanResources.Include(x => x.AsnwerParts).FirstOrDefaultAsync(x => x.Id == id);
@@ -57,7 +58,8 @@ namespace InterviewHelper.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [Route("{id:int}")]
+        [HttpDelete]
         public async Task<IActionResult> Delete(long id)
         {
             var humanResource = await _humanResourceContext.HumanResources.FirstOrDefaultAsync(x => x.Id == id);
