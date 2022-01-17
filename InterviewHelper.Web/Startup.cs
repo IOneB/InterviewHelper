@@ -36,7 +36,8 @@ namespace InterviewHelper.Web
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .WithOrigins("http://little-interview-helper-client.herokuapp.com/")
+                .SetIsOriginAllowed(o => true)
+                //.WithOrigins("http://little-interview-helper-client.herokuapp.com/")
                 .AllowCredentials());
 
             app.UseAuthentication();
