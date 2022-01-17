@@ -11,6 +11,6 @@ namespace InterviewHelper.DAL.Models.Entities
         public string Name { get; set; }
         public DateTime? DateInput { get; set; }
 
-        public virtual List<AnswerPart> AsnwerParts { get; set; } = new List<AnswerPart>();
+        public virtual List<AnswerPart> AnswerParts { get; set; } = new List<AnswerPart>();
     }
 }
