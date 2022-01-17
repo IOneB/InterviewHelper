@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace InterviewHelper.DAL.Models.Entities
@@ -11,6 +10,6 @@ namespace InterviewHelper.DAL.Models.Entities
         public string Name { get; set; }
         public DateTime? DateInput { get; set; }
 
-        public virtual List<AnswerPart> AnswerParts { get; set; } = new List<AnswerPart>();
+        public string Answer { get; set; }
     }
 }

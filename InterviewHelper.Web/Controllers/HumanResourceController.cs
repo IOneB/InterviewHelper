@@ -24,7 +24,7 @@ namespace InterviewHelper.Controllers
         [HttpGet("{id}", Name = "GetHumanResource")]
         public async Task<ActionResult<HumanResource>> Details(long id)
         {
-            var human = await _humanResourceContext.HumanResources.AsNoTracking().Include(x => x.AnswerParts).FirstOrDefaultAsync(x => x.Id == id);
+            var human = await _humanResourceContext.HumanResources.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
             if (human is null)
                 return NotFound();
@@ -45,13 +45,12 @@ namespace InterviewHelper.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(long id, HumanResource humanResourceIn)
         {
-            var humanResource = await _humanResourceContext.HumanResources.Include(x => x.AnswerParts).FirstOrDefaultAsync(x => x.Id == id);
+            var humanResource = await _humanResourceContext.HumanResources.FirstOrDefaultAsync(x => x.Id == id);
             if (humanResource is null)
                 return NotFound();
 
             humanResource.Name = humanResourceIn.Name;
-            humanResource.DateInput = humanResourceIn.DateInput;
-            humanResource.AnswerParts = humanResourceIn.AnswerParts;
+            humanResource.Answer = humanResourceIn.Answer;
 
             await _humanResourceContext.SaveChangesAsync();
 
