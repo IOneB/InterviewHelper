@@ -1,3 +1,4 @@
+using InterviewHelper.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,53 +8,49 @@ using System;
 
 namespace InterviewHelper.Web
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<HumanResourcesContext>(options =>
-            {
-                string connectionString = Configuration.GetConnectionString("HumanResourcesContext");
-                var context = options.UseNpgsql(connectionString);
-            });
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddDbContext<HumanResourcesContext>(options =>
+			{
+				string connectionString = Configuration.GetConnectionString("HumanResourcesContext");
+				var context = options.UseNpgsql(connectionString);
+			});
 
-            services.AddCors();
-            services.AddControllers();
-        }
+			services.AddCors();
+			services.AddControllers();
+		}
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-            app.UseCors(builder => builder
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(o => true)
-                //.WithOrigins("http://little-interview-helper-client.herokuapp.com/")
-                .AllowCredentials());
+			app.UseStaticFiles();
 
-            app.UseAuthentication();
+			app.UseCors(builder => builder
+				.AllowAnyHeader()
+				.AllowAnyMethod()
+				.AllowAnyOrigin());
 
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+			app.UseRouting();
+			app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-            Migrate(app);
-        }
+			Migrate(app);
+		}
 
-        private static void Migrate(IApplicationBuilder app)
-        {
-            var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            var context = serviceScope.ServiceProvider.GetService<HumanResourcesContext>();
-            context.Database.Migrate();
-        }
-    }
+		private static void Migrate(IApplicationBuilder app)
+		{
+			var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+			var context = serviceScope.ServiceProvider.GetService<HumanResourcesContext>();
+			context.Database.Migrate();
+		}
+	}
 }

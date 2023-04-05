@@ -5,9 +5,7 @@ VisualStudioVersion = 17.0.31423.177
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.Web", "InterviewHelper.Web\InterviewHelper.Web.csproj", "{354CDC80-9752-4820-9728-751B0F16C9E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.DAL", "InterviewHelper.DAL\InterviewHelper.DAL.csproj", "{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{2A0C9B84-5BFD-4701-9C80-A0412D3C5366}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.Domain", "InterviewHelper.Domain\InterviewHelper.Domain.csproj", "{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{354CDC80-9752-4820-9728-751B0F16C9E1} = {2A0C9B84-5BFD-4701-9C80-A0412D3C5366}
-		{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227} = {2A0C9B84-5BFD-4701-9C80-A0412D3C5366}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4374B0E-7CDD-4801-88DF-184FC60AF596}

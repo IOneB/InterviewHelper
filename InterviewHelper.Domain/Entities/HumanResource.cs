@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace InterviewHelper.DAL.Models.Entities
+namespace InterviewHelper.Domain.Entities
 {
     public class HumanResource
     {
