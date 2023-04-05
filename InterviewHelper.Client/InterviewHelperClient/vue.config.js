@@ -1,4 +1,5 @@
 module.exports = {
+  outputDir: "../../InterviewHelper.Web/wwwroot",
   pluginOptions: {
     quasar: {
       importStrategy: "kebab",

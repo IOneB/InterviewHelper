@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.Web", "Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.Domain", "InterviewHelper.Domain\InterviewHelper.Domain.csproj", "{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Back", "Back", "{C2049DF7-D97C-49F1-B111-6DBEB32A1242}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Front", "Front", "{D32C716E-3867-4E54-8105-C50B8135A53E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewHelper.Client", "InterviewHelper.Client\InterviewHelper.Client.csproj", "{0416B128-61E6-46C0-B2E9-9E852D005741}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +27,18 @@ Global
 		{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0416B128-61E6-46C0-B2E9-9E852D005741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0416B128-61E6-46C0-B2E9-9E852D005741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0416B128-61E6-46C0-B2E9-9E852D005741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0416B128-61E6-46C0-B2E9-9E852D005741}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{354CDC80-9752-4820-9728-751B0F16C9E1} = {C2049DF7-D97C-49F1-B111-6DBEB32A1242}
+		{791EE0BC-EEA7-4FA4-BDBC-EBA33FCC9227} = {C2049DF7-D97C-49F1-B111-6DBEB32A1242}
+		{0416B128-61E6-46C0-B2E9-9E852D005741} = {D32C716E-3867-4E54-8105-C50B8135A53E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4374B0E-7CDD-4801-88DF-184FC60AF596}
