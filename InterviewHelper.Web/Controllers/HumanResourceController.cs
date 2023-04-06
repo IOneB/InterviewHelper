@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace InterviewHelper.Web.Controllers
 {
-    [ApiController]
+	[ApiController]
 	[Route("api/[controller]")]
 	public class HumanResourceController : ControllerBase
 	{
-		private readonly HumanResourcesContext _humanResourceContext;
+		private readonly HumanResourcesContext _dbContext;
 
 		public HumanResourceController(HumanResourcesContext humanResourceContext)
 		{
-			_humanResourceContext = humanResourceContext;
+			_dbContext = humanResourceContext;
 		}
 
 		[HttpGet]
-		public Task<List<HumanResource>> GetAll() => _humanResourceContext.HumanResources.AsNoTracking().ToListAsync();
+		public Task<List<HumanResource>> GetAll() => _dbContext.HumanResources.AsNoTracking().ToListAsync();
 
 		[HttpGet("{id}", Name = "GetHumanResource")]
 		public async Task<ActionResult<HumanResource>> Details(long id)
 		{
-			var human = await _humanResourceContext.HumanResources.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+			var human = await _dbContext.HumanResources.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
 			if (human is null)
 				return NotFound();
@@ -35,36 +35,36 @@ namespace InterviewHelper.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(HumanResource humanResource)
 		{
-			await _humanResourceContext.HumanResources.AddAsync(humanResource);
-			await _humanResourceContext.SaveChangesAsync();
+			await _dbContext.HumanResources.AddAsync(humanResource);
+			await _dbContext.SaveChangesAsync();
 
 			return CreatedAtAction("Create", new { id = humanResource.Id }, humanResource);
 		}
 
-		[HttpPut("{id:int}")]
+		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(long id, HumanResource humanResourceIn)
 		{
-			var humanResource = await _humanResourceContext.HumanResources.FirstOrDefaultAsync(x => x.Id == id);
+			var humanResource = await _dbContext.HumanResources.FirstOrDefaultAsync(x => x.Id == id);
 			if (humanResource is null)
 				return NotFound();
 
 			humanResource.Name = humanResourceIn.Name;
 			humanResource.Answer = humanResourceIn.Answer;
 
-			await _humanResourceContext.SaveChangesAsync();
+			await _dbContext.SaveChangesAsync();
 
 			return NoContent();
 		}
 
-		[HttpDelete("{id:int}")]
+		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(long id)
 		{
-			var humanResource = await _humanResourceContext.HumanResources.FirstOrDefaultAsync(x => x.Id == id);
+			var humanResource = await _dbContext.HumanResources.FirstOrDefaultAsync(x => x.Id == id);
 			if (humanResource is null)
 				return NotFound();
 
-			_humanResourceContext.HumanResources.Remove(humanResource);
-			await _humanResourceContext.SaveChangesAsync();
+			_dbContext.HumanResources.Remove(humanResource);
+			await _dbContext.SaveChangesAsync();
 
 			return NoContent();
 		}

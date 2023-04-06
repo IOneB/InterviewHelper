@@ -351,3 +351,4 @@ MigrationBackup/
 .ionide/
 
 ClientApp/
+/InterviewHelper.Web/appsettings.Development.json
