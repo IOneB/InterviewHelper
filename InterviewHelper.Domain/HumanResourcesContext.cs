@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InterviewHelper.Domain
 {
-    public class HumanResourcesContext : DbContext
+	public class HumanResourcesContext : DbContext
 	{
 		public DbSet<HumanResource> HumanResources { get; set; }
 

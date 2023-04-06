@@ -1,20 +1,28 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using InterviewHelper.Domain;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace InterviewHelper.Web
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var builder = WebApplication.CreateBuilder(args);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+builder.Services.AddDbContext<HumanResourcesContext>(options
+	=> options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(HumanResourcesContext))));
+
+builder.Services.AddCors();
+builder.Services.AddControllers();
+
+var app = builder.Build();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.UseCors(builder => builder
+	.AllowAnyHeader()
+	.AllowAnyMethod()
+	.AllowAnyOrigin());
+
+app.UseRouting();
+app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+app.Run();
