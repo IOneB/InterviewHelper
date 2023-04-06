@@ -352,4 +352,3 @@ MigrationBackup/
 
 ClientApp/
 appsettings.Development.json
-/InterviewHelper.Web/appsettings.Development.json
