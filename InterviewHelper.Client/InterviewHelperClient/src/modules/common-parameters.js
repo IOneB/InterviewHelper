@@ -1,3 +1,3 @@
 export default {
-  serverAddress: "/api/HumanResource",
+  serverAddress: "/api/HumanResources",
 };
